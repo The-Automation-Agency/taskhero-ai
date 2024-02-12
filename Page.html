@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Hero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .logo-img {
+            max-height: 60px;
+            width: auto;
+        }
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-500 to-indigo-600 min-h-screen flex flex-col items-center justify-center text-gray-800">
+    <div class="max-w-2xl w-full bg-white rounded-lg shadow p-6 space-y-6">
+        <div class="text-center">
+            <img src="https://assets-global.website-files.com/654aaccc99cb984e740e6d0f/654aacee25f0f04e8f6419a4_The-Automation-Agency-Logo.svg" alt="Task Hero Logo" class="logo-img mb-3 mx-auto">
+            <h1 class="text-2xl font-bold text-blue-800">TaskHero</h1>
+        </header>
+
+        <div class="space-y-4">
+            <div>
+        <label for="contentType" class="block text-sm font-semibold">Content Type:</label>
+        <select id="contentType" onchange="adjustInputFields()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <option value="article">Article</option>
+            <option value="blog post">Blog Post</option>
+            <option value="report">Report</option>
+            <option value="Facebook Post">Facebook Post</option>
+            <option value="Linkedin Post">Linkedin Post</option>
+            <option value="TikTok Post">TikTok Post</option>
+            <option value="General">General</option>
+            <option value="email campaign">Email Campaign</option>
+            <option value="press release">Press Release</option>
+            <option value="product description">Product Description</option>
+            <option value="landing page">Landing Page</option>
+            <option value="tutorial">Tutorial</option>
+            <option value="how-to guide">How-To Guide</option>
+            <option value="FAQ">FAQ</option>
+            <option value="interview">Interview</option>
+            <option value="case study">Case Study</option>
+            <option value="testimonial">Testimonial</option>
+            <option value="newsletter">Newsletter</option>
+            <option value="advertisement">Advertisement</option>
+            <option value="social media campaign">Social Media Campaign</option>
+            <option value="video script">Video Script</option>
+            <option value="podcast script">Podcast Script</option>
+            <option value="infographic">Infographic</option>
+            <option value="webinar">Webinar</option>
+            <option value="e-book">E-Book</option>
+            <option value="white paper">White Paper</option>
+            <option value="research paper">Research Paper</option>
+            <option value="proposal">Proposal</option>
+            <option value="personal blog post">Personal Blog Post</option>
+            <option value="diary entry">Diary Entry</option>
+            <option value="travelogue">Travelogue</option>
+            <option value="recipe">Recipe</option>
+            <option value="personal story">Personal Story</option>
+            <option value="memoir">Memoir</option>
+            <option value="poetry">Poetry</option>
+            <option value="short story">Short Story</option>
+            <option value="novel chapter">Novel Chapter</option>
+            <option value="film review">Film Review</option>
+            <option value="book review">Book Review</option>
+            <option value="game review">Game Review</option>
+            <option value="product review">Product Review</option>
+            <option value="personal opinion">Personal Opinion</option>
+            <option value="editorial">Editorial</option>
+            <option value="commentary">Commentary</option>
+            <option value="discussion post">Discussion Post</option>
+            <option value="forum post">Forum Post</option>
+            <option value="Q&A">Q&A</option>
+            <option value="user manual">User Manual</option>
+            <option value="technical documentation">Technical Documentation</option>
+            <option value="policy document">Policy Document</option>
+            <option value="legal document">Legal Document</option>
+            <option value="grant application">Grant Application</option>
+            <option value="scholarship application">Scholarship Application</option>
+            <option value="college essay">College Essay</option>
+            <option value="cover letter">Cover Letter</option>
+            <option value="resume">Resume</option>
+        </select>
+            </div>
+
+            <div id="subheadingsOrPostsContainer">
+                <!-- Subheadings or Posts dropdown will be dynamically inserted here -->
+            </div>
+
+            <div>
+                <label for="writingTone" class="block text-sm font-semibold">Writing Tone:</label>
+                <select id="writingTone" onchange="toggleCustomToneField()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option value="informative">Informative</option>
+                    <option value="friendly">Friendly</option>
+                    <option value="persuasive">Persuasive</option>
+                    <option value="professional">Professional</option>
+                    <option value="casual">Casual</option>
+                    <option value="inspirational">Inspirational</option>
+                    <option value="authoritative">Authoritative</option>
+                    <option value="humorous">Humorous</option>
+                    <option value="emotional">Emotional</option>
+                    <option value="enthusiastic">Enthusiastic</option>
+                    <option value="sarcastic">Sarcastic</option>
+                    <option value="motivational">Motivational</option>
+                    <option value="other">Other (specify)</option>
+                </select>
+                <input type="text" id="customTone" placeholder="Specify your tone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm hidden focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-semibold">Description:</label>
+                <textarea id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+
+            <div id="keywordsField">
+                <label for="keywords" class="block text-sm font-semibold">Keywords:</label>
+                <input type="text" id="keywords" placeholder="Enter keywords separated by commas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <button onclick="submitRequest()" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Generate</button>
+
+            <div id="progressBar" class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 overflow-hidden hidden">
+                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 0%; animation: progress 2s ease-out forwards;"></div>
+                <p class="text-sm text-blue-600 mt-2">Generations may take up to 45 seconds depending on content type.</p>
+            </div>
+
+        <div id="responseContainer" class="text-sm mt-4">
+            <div id="response" class="bg-blue-100 text-blue-700 p-4 rounded-lg hidden"></div>
+            <div id="error" class="bg-red-100 text-red-700 p-4 rounded-lg hidden"></div>
+            <!-- Button to copy response to clipboard -->
+            <button id="copyToClipboard" class="mt-4 w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700" style="display: none;">
+                Copy to Clipboard
+            </button>
+
+            <!-- Button to insert response into Google Docs -->
+            <button id="insertIntoDoc" class="mt-4 w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" style="display: none;">
+                Insert into Google Docs
+            </button>
+        </div>
+    </div>
+    <script>
+    function adjustInputFields() {
+        const contentType = document.getElementById('contentType').value;
+        const subheadingsOrPostsContainer = document.getElementById('subheadingsOrPostsContainer');
+
+        // Clear the container before adding new content
+        subheadingsOrPostsContainer.innerHTML = '';
+
+        // Check if the content type is one of the social media options
+        if (["Facebook Post", "Linkedin Post", "TikTok Post"].includes(contentType)) {
+            // If social media option is selected, show the posts dropdown with values 1-15
+            subheadingsOrPostsContainer.innerHTML = `
+                <label for="posts" class="block mb-2 text-sm font-medium text-gray-900">Amount of Posts:</label>
+                <select id="posts" class="select select-bordered w-full">
+                    ${Array.from({length: 15}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
+                </select>
+            `;
+        } else if (contentType !== "General") {
+            // If not a general content type, show the subheadings dropdown
+            subheadingsOrPostsContainer.innerHTML = `
+                <label for="subheadings" class="block mb-2 text-sm font-medium text-gray-900">Number of Subheadings:</label>
+                <select id="subheadings" class="select select-bordered w-full">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            `;
+        }
+        // No need to add content for "General" as it doesn't use subheadings or posts
+    }
+
+// Ensure this function is called when the content type selection changes
+document.getElementById('contentType').addEventListener('change', adjustInputFields);
+
+// Initial call to set the correct fields when the page loads
+adjustInputFields();
+
+
+        function toggleCustomToneField() {
+            const writingTone = document.getElementById('writingTone').value;
+            document.getElementById('customTone').style.display = writingTone === 'other' ? 'block' : 'none';
+        }
+
+        function submitRequest() {
+            const contentType = document.getElementById('contentType').value;
+            const subheadings = document.getElementById('subheadings') ? document.getElementById('subheadings').value : '';
+            const posts = document.getElementById('posts') ? document.getElementById('posts').value : '';
+            const writingToneSelection = document.getElementById('writingTone').value;
+            const customTone = writingToneSelection === 'other' ? document.getElementById('customTone').value : '';
+            const writingTone = customTone || writingToneSelection;
+            const description = document.getElementById('description').value;
+            const keywords = document.getElementById('keywords') ? document.getElementById('keywords').value : '';
+
+            // Show progress bar
+            document.getElementById('progressBar').style.display = 'block';
+
+            google.script.run
+                .withSuccessHandler(onSuccess)
+                .withFailureHandler(onFailure)
+                .callOpenAI(contentType, subheadings, writingTone, description, keywords, posts);
+        }
+
+        function markdownToPlainText(markdown) {
+            let plaintext = markdown
+                .replace(/### (.*?)/g, '$1\n') // Convert H3 headers to bold text
+                .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold formatting
+                .replace(/!\[(.*?)\]\((.*?)\)/g, '') // Remove images
+                .replace(/\[(.*?)\]\((.*?)\)/g, '$1 (link)') // Convert links to plain text
+                .replace(/`{3}(.*?)`{3}/gs, '$1') // Remove code blocks
+                .replace(/`(.+?)`/g, '$1') // Remove inline code
+                .replace(/\n\n/g, '<br><br>'); // Convert double newlines to breaks
+            return plaintext;
+        }
+
+        function onSuccess(response) {
+            document.getElementById('progressBar').style.display = 'none';
+            let plainTextResponse = markdownToPlainText(response); // Convert Markdown to plain text
+            document.getElementById('response').innerHTML = plainTextResponse; // Use innerHTML to render line breaks
+            document.getElementById('response').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            // Display the buttons
+            document.getElementById('copyToClipboard').style.display = 'block';
+            document.getElementById('insertIntoDoc').style.display = 'block';
+        }
+
+        function onFailure(error) {
+            document.getElementById('progressBar').style.display = 'none';
+            document.getElementById('response').textContent = '';
+            document.getElementById('error').textContent = 'Error: ' + error.message;
+        }
+
+
+       // Function to copy text to clipboard
+        document.getElementById('copyToClipboard').addEventListener('click', function() {
+            const text = document.getElementById('response').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        });
+
+        // Function to insert text into Google Docs
+        document.getElementById('insertIntoDoc').addEventListener('click', function() {
+            const text = document.getElementById('response').innerText;
+            google.script.run.insertTextIntoDoc(text);
+        });
+    </script>
+</body>
+</html>
